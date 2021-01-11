@@ -10,10 +10,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBox HorizontalAlignment="Left" PlaceholderText="Pick a Folder with logs" Margin="64,128,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400"/>
-        <Button Content="Browse" Margin="469,128,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Folder_Text" HorizontalAlignment="Left" PlaceholderText="Pick a Folder with logs" Margin="64,128,0,0" VerticalAlignment="Top" Width="400" AcceptsReturn="False" Header="Folder Path"/>
+        <Button x:Name="Browse_Button" Content="Browse" Margin="469,151,0,0" VerticalAlignment="Top" Click="Browse_Button_Click"/>
 
-        <Custom:DataGrid Margin="64,360,64,64" AutoGenerateColumns="True" ItemsSource="{x:Bind zoom-attendance.Attendance}"/>
-
+        <Custom:DataGrid Margin="64,360,64,64" AutoGenerateColumns="True" ItemsSource="{x:Bind attendees}"/>
+        <Button Content="Analyse Logs" Margin="539,151,0,0" VerticalAlignment="Top" Click="Analyse_Logs_Click"/>
     </Grid>
 </Page>
