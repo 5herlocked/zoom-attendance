@@ -14,6 +14,6 @@
         <Button x:Name="Browse_Button" Content="Browse" Margin="469,151,0,0" VerticalAlignment="Top" Click="Browse_Button_Click"/>
 
         <Custom:DataGrid Margin="64,360,64,64" AutoGenerateColumns="True" ItemsSource="{x:Bind attendees}"/>
-        <Button Content="Analyse Logs" Margin="539,151,0,0" VerticalAlignment="Top" Click="Analyse_Logs_Click"/>
+        <Button x:Name="Analyse_Button"  Content="Analyse Logs" Margin="539,151,0,0" VerticalAlignment="Top" Click="Analyse_Logs_Click" IsEnabled="False"/>
     </Grid>
 </Page>

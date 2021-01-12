@@ -28,39 +28,10 @@ namespace zoom_attendance
     {
         public StorageFolder folder = null;
         public List<Attendance> attendees = new List<Attendance>();
-        public StorageFolder folder = null;
 
-        public class Foo
-        {
-            public string Name { get; set; }
-            public string Email { get; set; }
-            public string Date { get; set; }
-        }
         public MainPage()
         {
             this.InitializeComponent();
-        }
-
-        public async void parse()
-        {
-            if (folder == null) return;
-
-            List<StorageFile> fileStream = (List<StorageFile>)await folder.GetItemsAsync();
-
-            foreach (var file in fileStream)
-            {
-                if (file.FileType.Equals("csv"))
-                {
-                    using (var reader = await file.OpenReadAsync())
-                    {
-                        using (var csv = new CsvReader((TextReader)reader, CultureInfo.InvariantCulture))
-                        {
-                            var records = csv.GetRecords<Foo>();
-                        }
-
-                    }
-                }
-            }
         }
 
         private async void Browse_Button_Click(object sender, RoutedEventArgs e)
@@ -85,16 +56,35 @@ namespace zoom_attendance
                 Windows.Storage.AccessCache.StorageApplicationPermissions.
                     FutureAccessList.AddOrReplace("PickedFolderToken", folder);
                 Folder_Text.Text = folder.Name;
+                Analyse_Button.IsEnabled = true;
             }
             else
             {
+                Analyse_Button.IsEnabled = false;
                 Folder_Text.Text = "Invalid Folder";
             }
         }
 
-        private void Analyse_Logs_Click(object sender, RoutedEventArgs e)
+        private async void Analyse_Logs_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (folder == null) return;
+
+            List<StorageFile> fileStream = (List<StorageFile>)await folder.GetItemsAsync();
+
+            foreach (var file in fileStream)
+            {
+                if (file.FileType.Equals("csv"))
+                {
+                    using (var reader = await file.OpenReadAsync())
+                    {
+                        using (var csv = new CsvReader((TextReader)reader, CultureInfo.InvariantCulture))
+                        {
+                            var records = csv.GetRecords<Attendance>();
+                        }
+
+                    }
+                }
+            }
         }
     }
 }
