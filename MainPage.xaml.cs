@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -14,10 +15,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using CsvHelper;
-using System.Globalization;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using CsvHelper;
 
 namespace zoom_attendance
 {
@@ -80,8 +79,8 @@ namespace zoom_attendance
                         using (var csv = new CsvReader((TextReader)reader, CultureInfo.InvariantCulture))
                         {
                             var records = csv.GetRecords<Attendance>();
+                            // Once records are aquired
                         }
-
                     }
                 }
             }
